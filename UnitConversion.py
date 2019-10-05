@@ -48,10 +48,7 @@ def convertTemperature(input_numerical_value, input_uom, target_uom):
     FahrenheitValue = k * 1.8 - 459.67
     RankenValue =  k * 1.8
     KelvinValue = k 
-    #print("Celsius value:", CelsiusVaue)
-    #print("FahrenheitValue value:", FahrenheitValue)
-    #print("RankenValue value:", RankenValue)
-    #print("KelvinValue value:", KelvinValue)
+
     if target_uom == "Kelvin":
         outputTemp = KelvinValue
     elif target_uom == "Celsius":
@@ -63,11 +60,12 @@ def convertTemperature(input_numerical_value, input_uom, target_uom):
 
     # round outputTemp to the tenths decimal place
     outputTemp = round(outputTemp, 1)
-    print("outputTemp Rounded to tenth:", outputTemp)
+    # print("outputTemp Rounded to tenth:", outputTemp)
     return outputTemp
 
 # def convertVolume(input_numerical_value, input_uom, target_uom):
 
+# logic to convert temperatures
 toK = { 'Celsius': (lambda c: c + 273.15),
         'Fahrenheit': (lambda f: (f + 459.67) / 1.8),
         'Rankine': (lambda r: r / 1.8),
@@ -77,6 +75,8 @@ toK = { 'Celsius': (lambda c: c + 273.15),
 
 def inputs(input_numerical_value, input_uom, target_uom, student_numeric_response):
     programConversionOutput = 0
+    # round student_numeric_response to the tenth decimal place
+    student_numeric_response = round(float(student_numeric_response), 1)
     print("The inputs are: {0}, {1}, {2}, {3}".format(input_numerical_value, input_uom, target_uom, student_numeric_response))
     # validate input_uom
     isInput_UOM_Valid = validate_input_uom(input_uom)
@@ -89,8 +89,11 @@ def inputs(input_numerical_value, input_uom, target_uom, student_numeric_respons
         if(isTarget_UOM_Valid):
             programConversionOutput = convertInputUOM_to_TargetUOM(input_numerical_value, input_uom, target_uom)
             print("Program conversion output is", format(programConversionOutput))
-
-    
+            if programConversionOutput == student_numeric_response:
+                print("Correct")
+            elif programConversionOutput != student_numeric_response:
+                print("Incorrect")
+            
 
 input_numerical_value = input("Please enter input_numerical_value: ")
 input_uom = input("Please enter input_uom: ")
