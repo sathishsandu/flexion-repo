@@ -1,3 +1,5 @@
+# import needed libraries
+import pytemperature
 
 temperatures_uom_list = ["Kelvin", "Celsius", "Fahrenheit", "Rankine"]
 volumes_uom_list = ["liters", "tablespoons", "cubic-inches", "cups", "cubic-feet", "gallons"]
@@ -31,7 +33,33 @@ def validate_target_uom(input_uom, target_uom):
 #       print("target_uom value entered is invalid")
     return isValid 
 
+# conversion function to convert input_numerical_value from input_uom to target_uom
+def convertInputUOM_to_TargetUOM(input_numerical_value, input_uom, target_uom):
+    convertedOutput = 0
+    if(input_uom) in temperatures_uom_list:
+        print("Invoking convertTemperature function")
+        convertedOutput = convertTemperature(input_numerical_value, input_uom, target_uom)
+        return convertedOutput
+
+def convertTemperature(input_numerical_value, input_uom, target_uom):
+    outputTemp = 0.0
+    if(input_uom == 'Kelvin'):
+        if(target_uom == 'Celsius'):
+            outputTemp = pytemperature.k2c(float(input_numerical_value))
+        elif(target_uom == 'Fahrenheit'):
+            outputTemp = pytemperature.k2f(float(input_numerical_value))
+    if(input_uom == 'Celsius'):
+        if(target_uom == 'Kelvin'):
+            outputTemp = pytemperature.c2k(float(input_numerical_value))
+        elif(target_uom == 'Fahrenheit'):
+            outputTemp = pytemperature.c2f(float(input_numerical_value))
+    return outputTemp
+
+# def convertVolume(input_numerical_value, input_uom, target_uom):
+
+
 def inputs(input_numerical_value, input_uom, target_uom, student_numeric_response):
+    programConversionOutput = 0
     print("The inputs are: {0}, {1}, {2}, {3}".format(input_numerical_value, input_uom, target_uom, student_numeric_response))
     # validate input_uom
     isInput_UOM_Valid = validate_input_uom(input_uom)
@@ -40,6 +68,12 @@ def inputs(input_numerical_value, input_uom, target_uom, student_numeric_respons
     if(isInput_UOM_Valid):
         isTarget_UOM_Valid = validate_target_uom(input_uom, target_uom)
         print("is target_uom value valid?:", format(isTarget_UOM_Valid))
+        # invoke convert function only if input_uom and target_uom are valid
+        if(isTarget_UOM_Valid):
+            programConversionOutput = convertInputUOM_to_TargetUOM(input_numerical_value, input_uom, target_uom)
+            print("Program conversion output is", format(programConversionOutput))
+
+    
 
 input_numerical_value = input("Please enter input_numerical_value: ")
 input_uom = input("Please enter input_uom: ")
