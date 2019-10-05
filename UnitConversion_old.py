@@ -7,6 +7,7 @@ volumes_uom_list = ["liters", "tablespoons", "cubic-inches", "cups", "cubic-feet
 # First validate input_uom value - is it in the specified list of temperature types or volume types?
 def validate_input_uom(input_uom):
     isValid = False
+    print("input_uom value is: ", format(input_uom))
     # check if input_uom is in temperatures_uom_list
     if(input_uom) in temperatures_uom_list:
         isValid = True
@@ -42,37 +43,24 @@ def convertInputUOM_to_TargetUOM(input_numerical_value, input_uom, target_uom):
 
 def convertTemperature(input_numerical_value, input_uom, target_uom):
     outputTemp = 0.0
-    # magnitude, unit = input('<value> <K/R/F/C> ? ').split()
-    k = toK[input_uom](float(input_numerical_value))
-    CelsiusValue = k - 273.15
-    FahrenheitValue = k * 1.8 - 459.67
-    RankenValue =  k * 1.8
-    KelvinValue = k 
-    #print("Celsius value:", CelsiusVaue)
-    #print("FahrenheitValue value:", FahrenheitValue)
-    #print("RankenValue value:", RankenValue)
-    #print("KelvinValue value:", KelvinValue)
-    if target_uom == "Kelvin":
-        outputTemp = KelvinValue
-    elif target_uom == "Celsius":
-        outputTemp = CelsiusValue
-    elif target_uom == "Fahrenheit":
-        outputTemp = FahrenheitValue
-    else:
-        outputTemp = RankenValue
-
-    # round outputTemp to the tenths decimal place
-    outputTemp = round(outputTemp, 1)
-    print("outputTemp Rounded to tenth:", outputTemp)
+    if(input_uom == 'Kelvin'):
+        if(target_uom == 'Celsius'):
+            outputTemp = pytemperature.k2c(float(input_numerical_value))
+        elif(target_uom == 'Fahrenheit'):
+            outputTemp = pytemperature.k2f(float(input_numerical_value))
+    if(input_uom == 'Celsius'):
+        if(target_uom == 'Kelvin'):
+            outputTemp = pytemperature.c2k(float(input_numerical_value))
+        elif(target_uom == 'Fahrenheit'):
+            outputTemp = pytemperature.c2f(float(input_numerical_value))
+    if(input_uom == 'Fahrenheit'):
+        if(target_uom == 'Kelvin'):
+            outputTemp = pytemperature.c2k(float(input_numerical_value))
+        elif(target_uom == 'Celsius'):
+            outputTemp = pytemperature.c2f(float(input_numerical_value))
     return outputTemp
 
 # def convertVolume(input_numerical_value, input_uom, target_uom):
-
-toK = { 'Celsius': (lambda c: c + 273.15),
-        'Fahrenheit': (lambda f: (f + 459.67) / 1.8),
-        'Rankine': (lambda r: r / 1.8),
-        'Kelvin': (lambda k: k) 
-      }
 
 
 def inputs(input_numerical_value, input_uom, target_uom, student_numeric_response):
