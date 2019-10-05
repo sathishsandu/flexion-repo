@@ -53,6 +53,11 @@ def convertTemperature(input_numerical_value, input_uom, target_uom):
             outputTemp = pytemperature.c2k(float(input_numerical_value))
         elif(target_uom == 'Fahrenheit'):
             outputTemp = pytemperature.c2f(float(input_numerical_value))
+    if(input_uom == 'Fahrenheit'):
+        if(target_uom == 'Kelvin'):
+            outputTemp = pytemperature.c2k(float(input_numerical_value))
+        elif(target_uom == 'Celsius'):
+            outputTemp = pytemperature.c2f(float(input_numerical_value))
     return outputTemp
 
 # def convertVolume(input_numerical_value, input_uom, target_uom):
