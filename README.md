@@ -12,3 +12,13 @@ input_numerical_value
 input_uom 
 target_uom
 student_numeric_response
+
+Output of the Program will be one of these values:
+Correct -   When the Student_numeric_response value matches the authoritative answer after both the student’s response and authoritative answer are rounded to the tenths place. 
+Incorrect - When the Student_numeric_response value does not match the authoritative answer after both the student’s response and authoritative answer are rounded to the tenths place. 
+Invalid - The output will be 'Invalid' if one of the scenarios is true:
+    * If the input_uom value and/or target_uom provided is not in one of the following valid values lists:
+    temperatures_uom_list = ["Kelvin", "Celsius", "Fahrenheit", "Rankine"]
+    volumes_uom_list = ["liters", "tablespoons", "cubic-inches", "cups", "cubic-feet", "gallons"]
+    * If type of input_uom and target_uom must match. That means, if the input_uom is a temperature uom then target_uom must also be temperature uom. 
+      If the input_uom is a volume uom then target_uom must also be a volume uom. 
