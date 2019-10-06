@@ -1,11 +1,7 @@
 # Temp script for Volume Conversion
 # need code for cubic-inches and cubic-feet
 
-from decimal import Decimal
-
 #volumes_uom_list = [liters, tablespoons, cubic_inches, cups, cubic_feet, gallons]
-
-
 
 #convert_dict = {
 #        tablespoons: {cups: Decimal('0.063'), liters: Decimal('0.015'), gallons: Decimal('0.004')},

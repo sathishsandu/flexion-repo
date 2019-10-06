@@ -43,14 +43,19 @@ def convertInputUOM_to_TargetUOM(input_numerical_value, input_uom, target_uom):
         print("Invoking convertTemperature function")
         convertedOutput = convertTemperature(input_numerical_value, input_uom, target_uom)
         return convertedOutput
+    if(input_uom) in volumes_uom_list:
+        print("Invoking convertVolumes function")
+        convertedOutput = convertVolume(input_numerical_value, input_uom, target_uom)
+        return convertedOutput
 
 def convertTemperature(input_numerical_value, input_uom, target_uom):
     outputTemp = 0.0
-
+    # convert input_uom to 'Kelvin' temperature UOM.
     k = toK[input_uom](float(input_numerical_value))
+    # now calculate all the temperature values in temperatures_uom_list.
     celsiusValue = k - 273.15
     fahrenheitValue = k * 1.8 - 459.67
-    rankenValue =  k * 1.8
+    rankineValue =  k * 1.8
     kelvinValue = k 
 
     if target_uom == "Kelvin":
@@ -59,21 +64,59 @@ def convertTemperature(input_numerical_value, input_uom, target_uom):
         outputTemp = celsiusValue
     elif target_uom == "Fahrenheit":
         outputTemp = fahrenheitValue
-    else:
-        outputTemp = rankenValue
+    elif target_uom == "Rankine":
+        outputTemp = rankineValue
 
     # round outputTemp to the tenths decimal place
     outputTemp = round(outputTemp, 1)
     return outputTemp
 
-# def convertVolume(input_numerical_value, input_uom, target_uom):
+def convertVolume(input_numerical_value, input_uom, target_uom):
+    outputVolume = 0
+    # convert input_uom to 'Kelvin' temperature UOM.
+    t = toT[input_uom](float(input_numerical_value))
 
-# logic to convert temperatures
+    # now calculate all the volume values in volumes_uom_list.
+    litersValue = t * 0.0147868
+    gallonsValue = t * 0.00390625
+    cupsValue =  t * 0.0625
+    cubicInchesValue = t * 0.902344
+    cubicFeetValue = t * 0.00052219
+    tablespoonsValue = t
+
+    # volumes_uom_list = ["liters", "tablespoons", "cubic-inches", "cups", "cubic-feet", "gallons"]
+    if target_uom == "liters":
+        outputVolume = litersValue
+    elif target_uom == "tablespoons":
+        outputVolume = tablespoonsValue
+    elif target_uom == "cubic-inches":
+        outputVolume = cubicInchesValue
+    elif target_uom == "cups":
+        outputVolume = cupsValue
+    elif target_uom == "cubic-feet":
+        outputVolume = cubicFeetValue
+    elif target_uom == "gallons":
+        outputVolume = gallonsValue
+
+    # round outputVolume to the tenths decimal place
+    outputVolume = round(outputVolume, 1)
+    return outputVolume
+
+# convert given temperature to Kelvin UOM
 toK = { 'Celsius': (lambda c: c + 273.15),
         'Fahrenheit': (lambda f: (f + 459.67) / 1.8),
         'Rankine': (lambda r: r / 1.8),
         'Kelvin': (lambda k: k) 
       }
+
+# convert given volume to tablespoons UOM
+toT = { 'liters': (lambda l: l * 67.628),
+        'gallons': (lambda g: g * 256),
+        'cups': (lambda c: c * 16),
+        'cubicInches': (lambda ci: ci * 1.10823),
+        'cubicFeet': (lambda cf: cf * 1915.01),
+        'tablespoons': (lambda t: t) }
+
 
 
 def inputs(input_numerical_value, input_uom, target_uom, student_numeric_response):
