@@ -1,15 +1,6 @@
 # Temp script for Volume Conversion
 # need code for cubic-inches and cubic-feet
 
-#volumes_uom_list = [liters, tablespoons, cubic_inches, cups, cubic_feet, gallons]
-
-#convert_dict = {
-#        tablespoons: {cups: Decimal('0.063'), liters: Decimal('0.015'), gallons: Decimal('0.004')},
-#        cups: {tablespoons: Decimal('16'), liters: Decimal('0.247'), gallons: Decimal('0.063')},
-#        liters: {tablespoons: Decimal('67.63'), cups: Decimal('4.23'), gallons: Decimal('0.26')},
-#        gallons: {tablespoons: Decimal('256'), cups: Decimal('16'), liters: Decimal('3.79')}
-#    }
-
 # convert everything to tablespoons UOM
 toT = { 'liters': (lambda l: l * 67.628),
         'gallons': (lambda g: g * 256),
