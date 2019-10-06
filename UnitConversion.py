@@ -1,9 +1,4 @@
-# Code Requirements:
-#1.	The teacher must be able to provide an input numerical value, an input unit of measure, a target unit of measure, and a student’s numeric response.
-#2.	The system indicates that the response is correct, incorrect, or invalid. To be considered correct, the student’s response must match an authoritative answer after both the student’s response and authoritative answer are rounded to the tenths place. 
 
-# import needed libraries
-# import pytemperature
 
 temperatures_uom_list = ["Kelvin", "Celsius", "Fahrenheit", "Rankine"]
 volumes_uom_list = ["liters", "tablespoons", "cubic-inches", "cups", "cubic-feet", "gallons"]
