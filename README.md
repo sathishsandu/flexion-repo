@@ -3,7 +3,6 @@ Github Repo for the CICD POC
 
 UnitConversion.py is the main python script.
 
-
 Execution Instructions:
 On command line (unix or windows), execute the following command
 python UnitConversion.py
