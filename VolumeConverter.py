@@ -1,5 +1,4 @@
-# Temp script for Volume Conversion
-# need code for cubic-inches and cubic-feet
+
 
 # convert everything to tablespoons UOM
 toT = { 'liters': (lambda l: l * 67.628),
