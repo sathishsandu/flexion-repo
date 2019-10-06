@@ -68,6 +68,7 @@ def convertTemperature(input_numerical_value, input_uom, target_uom):
         outputTemp = rankineValue
 
     # round outputTemp to the tenths decimal place
+    print("outputTemp before rounding is:", outputTemp)
     outputTemp = round(outputTemp, 1)
     return outputTemp
 
@@ -99,6 +100,7 @@ def convertVolume(input_numerical_value, input_uom, target_uom):
         outputVolume = gallonsValue
 
     # round outputVolume to the tenths decimal place
+    print("outputVolume before rounding is:", outputVolume)
     outputVolume = round(outputVolume, 1)
     return outputVolume
 
