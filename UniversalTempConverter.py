@@ -4,8 +4,9 @@ toK = { 'Celsius': (lambda c: c + 273.15),
         'Kelvin': (lambda k: k) }
 
 # while True:
-magnitude, unit = input('<value> <K/R/F/C> ? ').split()
+magnitude, unit = input('<value> <Kelvin/Rankine/Fahrenheit/Celsius> ? ').split()
 k = toK[unit](float(magnitude))
+print(k)
 #print("%g Kelvin = %g Celsius = %g Fahrenheit = %g Rankine degrees."
 #      % (k, k - 273.15, k * 1.8 - 459.67, k * 1.8))
 CelsiusVaue = k - 273.15
