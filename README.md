@@ -1,5 +1,5 @@
 # flexion-repo
-Github Repo for the CICD POC
+Github Repo for the CICD Code POC
 
 UnitConversion.py is the main python script.
 
