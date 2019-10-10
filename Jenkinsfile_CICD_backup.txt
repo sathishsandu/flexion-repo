@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Build stage DONE'
+                sh 'tar -cf /tmp/mycode/mycode.tar README.md UnitConversion.py'
+                sh 'chmod 777 /tmp/mycode/mycode.tar'
+            }
+        }
+        stage('DeployToStaging') {
+            when {
+                branch 'master'
+            }
+            steps {
+                withCredentials([sshUserPrivateKey(credentialsId: 'ubuntu-staging', keyFileVariable: 'myawsprivatekey', passphraseVariable: '', usernameVariable: 'ubuntu')]) {
+                    sh """
+                        echo $ubuntu
+                        echo $myawsprivatekey
+                        cat $myawsprivatekey 
+
+
+                    """
+                }   
+                
+                // sshPublisher(publishers: [sshPublisherDesc(configName: 'staging', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'tar -xf /home/ubuntu/mycode.tar -C /home/ubuntu/mycode', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/home/ubuntu', remoteDirectorySDF: false, removePrefix: '/tmp/mycode/', sourceFiles: '/tmp/mycode/mycode.tar')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                // withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'ubuntu-staging', \
+                //                              keyFileVariable: 'SSH_KEY_FOR_UBUNTU', \
+                //                              passphraseVariable: '', \
+                //                              usernameVariable: 'ubuntu')]) {
+                //     sshPublisher(
+                //         failOnError: true,
+                //         continueOnError: false,
+                //         publishers: [
+                //             sshPublisherDesc(
+                //                 configName: 'staging', 
+                //                 transfers: [
+                //                     sshTransfer(
+                //                         sourceFiles: '/tmp/mycode/mycode.tar',
+                //                         removePrefix: '/tmp/mycode/',
+                //                         remoteDirectory: '/home/ubuntu',
+                //                         execCommand: 'tar -xf /home/ubuntu/mycode.tar -C /home/ubuntu/mycode'
+                //                     )
+                //                 ]
+                //             )
+                //         ]
+                //     )
+                // }
+            }
+        }
+    }
+}
