@@ -15,10 +15,10 @@ pipeline {
             steps {
                 sh 'pwd'
                 sh 'whoami'
-                sh 'scp README.md UnitConversion.py ubuntu@52.3.31.2:/home/ubuntu/mycode/'
+                sh 'scp README.md UnitConversion.py ubuntu@<staging-IP>:/home/ubuntu/mycode/'
 
-                // sh 'scp /tmp/mycode/mycode.tar ubuntu@52.3.31.2:/home/ubuntu/testcode/'
-                // sh 'ssh ubuntu@52.3.31.2 rm -f /home/ubuntu/testcode/*'
+                // sh 'scp /tmp/mycode/mycode.tar ubuntu@<staging-IP>:/home/ubuntu/testcode/'
+                // sh 'ssh ubuntu@<staging-IP> rm -f /home/ubuntu/testcode/*'
 
                 // withCredentials([sshUserPrivateKey(credentialsId: 'ubuntu-staging', keyFileVariable: 'myawsprivatekey', passphraseVariable: '', usernameVariable: 'ubuntu')]) {
                 //     sh """
@@ -61,10 +61,10 @@ pipeline {
             steps {
                 sh 'pwd'
                 sh 'whoami'
-                sh 'scp README.md UnitConversion.py ubuntu@3.227.141.128:/home/ubuntu/mycode/'
+                sh 'scp README.md UnitConversion.py ubuntu@<Prod-IP>:/home/ubuntu/mycode/'
                 
-                // sh 'scp /tmp/mycode/mycode.tar ubuntu@52.3.31.2:/home/ubuntu/testcode/'
-                // sh 'ssh ubuntu@52.3.31.2 rm -f /home/ubuntu/testcode/*'
+                // sh 'scp /tmp/mycode/mycode.tar ubuntu@<Prod-IP>:/home/ubuntu/testcode/'
+                // sh 'ssh ubuntu@<Prod-IP> rm -f /home/ubuntu/testcode/*'
 
                 // withCredentials([sshUserPrivateKey(credentialsId: 'ubuntu-staging', keyFileVariable: 'myawsprivatekey', passphraseVariable: '', usernameVariable: 'ubuntu')]) {
                 //     sh """
